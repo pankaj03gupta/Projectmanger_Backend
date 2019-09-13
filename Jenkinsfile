@@ -20,7 +20,7 @@ pipeline {
  			     checkout([$class: 'GitSCM', branches: [[name: '*/master']],  
  				      doGenerateSubmoduleConfigurations: false, extensions: [],  
  				      submoduleCfg: [],  
- 				      userRemoteConfigs: [[url: 'https://github.com/pankaj03gupta/projectManager']]]) 
+ 				      userRemoteConfigs: [[url: 'https://github.com/pankaj03gupta/Projectmanger_Backend']]]) 
  			     echo 'Git checkout succeeded' 
  		   } 
  	   } 

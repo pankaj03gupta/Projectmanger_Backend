@@ -1,8 +1,8 @@
 pipeline { 
      agent any 
      tools {  
-         maven 'maven-3' 
- 		jdk 'jdk' 
+         maven 'Maven' 
+ 		jdk 'JDK8' 
      } 
      triggers { 
          pollSCM('H/5 * * * *') 
@@ -27,14 +27,19 @@ pipeline {
  
  	   stage('Build & Analyse') { 
  		   steps { 
- 			bat "mvn clean install" 
+ 			bat "mvn clean install sonar:sonar" 
  		   } 
  	   } 
  	   stage('Publish Junit Report & Archive') { 
  		   steps { 
  				archiveArtifacts artifacts: 'target/*.jar', fingerprint: true 
  				junit '**/TEST-*.xml' 
- 			       
+ 			        step([$class: 'JacocoPublisher',  
+ 				      execPattern: '**/*.exec', 
+ 				      classPattern: '**/classes', 
+ 				      sourcePattern: '**/src/main/java', 
+ 				      exclusionPattern: '**/src/test*' 
+ 				]) 
  		   } 
  		} 
  	} 

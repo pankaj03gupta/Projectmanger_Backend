@@ -144,7 +144,7 @@ public class ProjectManagerControllerTest extends TestCase {
 		task.setProject(project);
 		task.setUser(user);
 		
-		ResponseEntity<String> response = testRestTemplate.postForEntity(baseUrl.concat("/addTask2"), task, String.class);
+		ResponseEntity<String> response = testRestTemplate.postForEntity(baseUrl.concat("/addTask"), task, String.class);
 		assertThat(response.getStatusCode(), equalTo(HttpStatus.OK));
     }
     

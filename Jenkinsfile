@@ -34,6 +34,12 @@ pipeline {
  		   steps { 
  				archiveArtifacts artifacts: 'target/*.jar', fingerprint: true 
  				junit '**/TEST-*.xml' 
+                  step([$class: 'JacocoPublisher',  
+ 				      execPattern: '**/*.exec', 
+ 				      classPattern: '**/classes', 
+ 				      sourcePattern: '**/src/main/java', 
+ 				      exclusionPattern: '**/src/test*' 
+ 				]) 
  			        
  		   } 
  		} 
